@@ -1,0 +1,28 @@
+{
+  "name": "food-delivery-app",
+  "version": "1.0.0",
+  "description": "it is a food delivery web app using react",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sachinr0x/Namaste-React/Food-Delivery-App"
+  },
+  "author": "sachin",
+  "license": "ISC",
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "parcel": "^2.16.4",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-router-dom": "^6.30.6",
+    "shimmer-effects-react": "^1.0.6"
+  },
+  "devDependencies": {
+    "postcss": "^8.5.30",
+    "tailwindcss": "^4.3.3"
+  }
+}

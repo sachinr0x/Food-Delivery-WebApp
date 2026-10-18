@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 110" role="img" aria-labelledby="title">
+  <title id="title">r0x SeRvEs</title>
+
+  <g aria-hidden="true">
+    <path
+      d="M50 6c-22 0-39 17-39 39 0 26 39 59 39 59s39-33 39-59C89 23 72 6 50 6Z"
+      fill="#E85D3F"
+    />
+    <circle cx="50" cy="43" r="23" fill="#FFF8EF" />
+    <circle cx="50" cy="43" r="17" fill="none" stroke="#183D35" stroke-width="2.5" />
+
+    <path
+      d="M39 29v11m-5-11v8m10-8v8m-5 3v20"
+      fill="none"
+      stroke="#183D35"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2.5"
+    />
+    <path
+      d="M60 29c-4 5-6 11-6 17v5h6v10"
+      fill="none"
+      stroke="#183D35"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2.5"
+    />
+  </g>
+
+  <text
+    x="112"
+    y="51"
+    fill="#183D35"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="32"
+    font-weight="700"
+  >r0x</text>
+  <text
+    x="112"
+    y="81"
+    fill="#E85D3F"
+    font-family="Arial, sans-serif"
+    font-size="19"
+    font-weight="700"
+  >SeRvEs</text>
+</svg>
