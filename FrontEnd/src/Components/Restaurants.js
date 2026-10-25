@@ -1,12 +1,15 @@
 import { API_URL } from "../Constants/constants";
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Shimmer from "./Shimmer"
+import Shimmer from "./Shimmer";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Restaurants = ({ searchText }) => {
   const [allRestaurants, setAllRestaurants] = useState(null);
   const [topRatedRestaurants, setTopRatedRestaurants] = useState(false);
+  const isOnline = useOnlineStatus();
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
 
   useEffect(() => {
     fetchData();
@@ -18,7 +21,7 @@ const Restaurants = ({ searchText }) => {
 
     const restaurants =
       json?.data?.cards?.find(
-        (card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants
+        (card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants,
       )?.card?.card?.gridElements?.infoWithStyle?.restaurants ?? [];
 
     setAllRestaurants(restaurants);
@@ -30,8 +33,16 @@ const Restaurants = ({ searchText }) => {
       )
     : allRestaurants;
 
-  if (allRestaurants === null){
-    return <Shimmer/>
+  if (!isOnline) {
+    return (
+      <div>
+        <h1>
+          Seems like you are offline. Please check your internet connection!
+        </h1>
+      </div>
+    );
+  } else if (allRestaurants === null) {
+    return <Shimmer />;
   }
 
   return (
@@ -52,7 +63,9 @@ const Restaurants = ({ searchText }) => {
             key={restaurant?.info?.id}
             to={"restaurant/" + restaurant?.info?.id}
           >
-            <RestaurantCard resData={restaurant} />
+            {restaurant?.info?.promoted? 
+            (<RestaurantCardPromoted resData={restaurant}/>): 
+            (<RestaurantCard resData={restaurant} />)}            
           </Link>
         ))}
       </div>
