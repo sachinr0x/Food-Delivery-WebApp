@@ -11,14 +11,10 @@ const RestaurantMenu = () => {
     (entry) => entry?.card?.card?.info,
   )?.card?.card?.info;
 
-  console.log(restaurantInfo);
-
   const regularCards =
     resInfo?.data?.cards?.find(
       (entry) => entry?.groupedCard?.cardGroupMap?.REGULAR,
     )?.groupedCard?.cardGroupMap?.REGULAR?.cards ?? [];
-
-  console.log(regularCards);
 
   const categories = regularCards.flatMap((entry) => {
     const category = entry?.card?.card;
