@@ -1,11 +1,16 @@
 // import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantBanner from "./RestaurantBanner";
+import CategoryItems from "./CategoryItems";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
+  const [showIndex, setShowIndex] = useState(0);
 
   const resInfo = useRestaurantMenu(resId);
+  console.log(resInfo);
 
   const restaurantInfo = resInfo?.data?.cards?.find(
     (entry) => entry?.card?.card?.info,
@@ -15,6 +20,8 @@ const RestaurantMenu = () => {
     resInfo?.data?.cards?.find(
       (entry) => entry?.groupedCard?.cardGroupMap?.REGULAR,
     )?.groupedCard?.cardGroupMap?.REGULAR?.cards ?? [];
+
+  console.log(regularCards);
 
   const categories = regularCards.flatMap((entry) => {
     const category = entry?.card?.card;
@@ -35,40 +42,19 @@ const RestaurantMenu = () => {
     return [];
   });
 
-
-
   return (
     <div className="restaurantmenu-container">
-      <section className="restaurant-banner">
-        <h1>{restaurantInfo?.name ?? "Restaurant"}</h1>
-        <p>{restaurantInfo?.costForTwoMessage}</p>
-      </section>
-      {categories.map((category) => (
-        <section
+      <RestaurantBanner
+        resName={restaurantInfo?.name ?? "Restaurant"}
+        costForTwo={restaurantInfo?.costForTwoMessage}
+      />
+      {categories.map((category, index) => ( 
+        <CategoryItems
           key={category.categoryId ?? category.title}
-          className="category-container"
-        >
-          <h2>{category.title}</h2>
-          <ul>
-            {(category.itemCards ?? []).map((dishCard) => {
-              const dish = dishCard?.card?.card?.info ?? dishCard?.card?.info;
-
-              if (!dish) return null;
-
-              const price =
-                dish.price ??
-                dish.defaultPrice ??
-                dish.variantsV2?.pricingModels?.[0]?.price;
-
-              return (
-                <li key={dish.id}>
-                  {dish.name} -{" "}
-                  {price != null ? `₹${price / 100}` : "Price unavailable"}
-                </li>
-              );
-            })}
-          </ul>
-        </section>
+          category={category}
+          showItems={index === showIndex}
+          setShowIndex={() => setShowIndex(index === showIndex ? -1 : index)}
+        />
       ))}
     </div>
   );
